@@ -39,8 +39,16 @@ public class Seeder implements CommandLineRunner {
       bananaRepository.saveAll(List.of(new Banana(100L, chiquita),
           new Banana(125L, dole), new Banana(123L, delMonte),
           new Banana(122L, dole), new Banana(150L, zespri),
+          new Banana(143L, itvitae),
+          new Banana(143L, itvitae),
+          new Banana(143L, itvitae),
+          new Banana(143L, itvitae),
+          new Banana(143L, itvitae),
+          new Banana(143L, itvitae),
           new Banana(143L, itvitae)
       ));
+
+
     }
   }
 }
