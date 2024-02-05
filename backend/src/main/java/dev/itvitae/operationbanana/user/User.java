@@ -78,21 +78,4 @@ public class User implements UserDetails {
             return new SimpleGrantedAuthority(toString());
         }
     }
-
-    @Getter
-    @Setter
-    public static class AccessToken {
-        private String username;
-        private String token;
-
-        public AccessToken(String username, String token) {
-            this.username = username;
-            this.token = token;
-        }
-
-        @Override
-        public String toString() {
-            return token;
-        }
-    }
 }
