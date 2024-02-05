@@ -1,22 +1,28 @@
 package dev.itvitae.operationbanana.banana;
 
+import dev.itvitae.operationbanana.brand.Brand;
+import java.math.BigDecimal;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/v1/banana/stock")
 public class BananaUserController {
+  private final BananaService bananaService;
   @GetMapping
-  public List<Banana> getAllBananas() {
-    return null;
+  public ResponseEntity<List<Banana>> getAllBananas() {
+    return ResponseEntity.ok(bananaService.getAll());
   }
 
   @GetMapping("/brand")
-  public List<Banana> getBananasByBrandName(@RequestParam String name) {
+  public ResponseEntity<List<Banana>> getBananasByBrandName(@RequestParam String name) {
     System.out.println(name);
-    return null;
+    return ResponseEntity.ok(bananaService.getAllByBrandName(name));
   }
 }
