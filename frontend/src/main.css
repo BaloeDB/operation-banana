@@ -15,12 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #f7ad3e;
+  color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
-  color: #db9630;
-  filter: drop-shadow(0.1rem -0.1rem 0.2rem #99661a);
+  color: #535bf2;
 }
 
 * {
@@ -51,37 +50,8 @@ h1 {
   flex-direction: column;
 }
 
-.items-start {
-  align-items: start;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
 .gap-2 {
   gap: 0.5rem;
-}
-
-.m-0 {
-  margin: 0;
-}
-
-.relative {
-  position: relative;
-}
-
-.circle-child {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  left: calc(50% - 12.5px);
-  top: calc(50% - 12.5px);
-  user-select: none;
 }
 
 button {
@@ -95,11 +65,9 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-
 button:hover {
-  border-color: #f7ad3e;
+  border-color: #646cff;
 }
-
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -116,4 +84,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/***********************************/
+
+#login-form {
+  margin: 2rem 1rem;
+}
+
+#login-form input[type="text" i],
+#login-form input[type="password" i] {
+  width: 100%;
+  font-size: large;
+  padding: 0.25rem;
+}
+
+.right {
+  text-align: right;
 }
