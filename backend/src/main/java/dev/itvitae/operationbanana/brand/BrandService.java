@@ -1,6 +1,7 @@
 package dev.itvitae.operationbanana.brand;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class BrandService {
     } else {
       return brand;
     }
+  }
+
+  public List<Brand> getAll() {
+    return brandRepository.findAll();
   }
 
 }

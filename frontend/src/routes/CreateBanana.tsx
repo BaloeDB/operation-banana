@@ -15,7 +15,7 @@ function BananaWebShop() {
       "http://localhost:8080/api/v1/banana/brands"
     );
 
-    setBrands(getBrands.data);
+    setBrands(getBrands.data);    
 
     if (order) {
       const orderBanana = await axios.post(
