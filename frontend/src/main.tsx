@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BananaClicker from "./routes/BananaClicker.tsx";
 import Home from "./routes/Home.tsx";
 import React from "react";
+import BananaRecipe from "./routes/BananaRecipe.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "banana-clicker",
         element: <BananaClicker />,
+      },
+      {
+        path: "banana-recipe",
+        element: <BananaRecipe />,
       },
     ],
   },
