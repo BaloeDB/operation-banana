@@ -32,10 +32,4 @@ public class Banana {
     this.date = date;
     this.brand = brand;
   }
-
-  public Banana(Long weight, Brand brand) {
-    this.weight = weight;
-    this.date = LocalDateTime.now();
-    this.brand = brand;
-  }
 }

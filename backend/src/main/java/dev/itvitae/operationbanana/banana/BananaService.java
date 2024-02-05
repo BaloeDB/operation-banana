@@ -1,5 +1,7 @@
 package dev.itvitae.operationbanana.banana;
 
+import dev.itvitae.operationbanana.brand.Brand;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,5 +17,9 @@ public class BananaService {
 
   public List<Banana> getAllByBrandName(String name) {
     return bananaRepository.findAllByBrandName(name);
+  }
+
+  public Banana createBanana(Long weight, LocalDateTime dateTime, Brand brand) {
+    return bananaRepository.save(new Banana(weight, dateTime, brand));
   }
 }
