@@ -50,8 +50,51 @@ h1 {
   flex-direction: column;
 }
 
+.items-start {
+  align-items: start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-2 {
   gap: 0.5rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.btn-round {
+  border-radius: 100%;
+  transition: transform 0.15s;
+  user-select: none;
+}
+
+.btn-round:hover {
+  transform: scale(1.05);
+}
+
+.btn-round:active {
+  transform: scale(0.95);
+}
+
+.circle-child {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: calc(50% - 12.5px);
+  top: calc(50% - 12.5px);
+  user-select: none;
 }
 
 button {
@@ -65,9 +108,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
