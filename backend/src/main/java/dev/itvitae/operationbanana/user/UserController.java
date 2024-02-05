@@ -30,7 +30,7 @@ public class UserController {
             User user = (User) authentication.getPrincipal();
             return tokenProvider.generateAccessToken(user);
         } catch (Exception exception) {
-            return null;
+            return "";
         }
     }
 
