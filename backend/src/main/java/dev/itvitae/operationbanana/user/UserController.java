@@ -3,6 +3,7 @@ package dev.itvitae.operationbanana.user;
 import dev.itvitae.operationbanana.security.JsonTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,19 +31,22 @@ public class UserController {
             User user = (User) authentication.getPrincipal();
             return tokenProvider.generateAccessToken(user);
         } catch (Exception exception) {
-            return "";
+            throw new AccessDeniedException("Unable to authenticate", exception);
         }
     }
 
     @PostMapping(value = "/register", produces = MediaType.TEXT_PLAIN_VALUE)
     public String register(@RequestBody User user) {
-        if (userRepo.getByUsername(user.getUsername()).isEmpty() && user.validateDetails()) {
+        if (userRepo.getByUsername(user.getUsername()).isEmpty()) {
+            throw new AccessDeniedException("Username already exists");
+        }
+        if (user.validateDetails()) {
             String password = user.getPassword();
             user.setPassword(passwordEncoder.encode(password));
             user.setRoles(User.Role.ROLE_USER);
             userRepo.save(user);
             return tokenProvider.generateAccessToken(user);
         }
-        return "";
+        throw new AccessDeniedException("Invalid username or password");
     }
 }

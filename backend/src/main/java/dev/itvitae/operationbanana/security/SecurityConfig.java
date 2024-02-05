@@ -28,9 +28,9 @@ public class SecurityConfig {
         httpSecurity.cors(AbstractHttpConfigurer::disable);
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.authorizeHttpRequests(request -> {
-            request.requestMatchers("/api/user").permitAll();
-            request.requestMatchers("/api/admin").hasRole("ADMIN");
-            request.requestMatchers("/api").hasAnyRole("USER", "ADMIN");
+            request.requestMatchers("/api/v1/banana/user").permitAll();
+            request.requestMatchers("/api/v1/banana/admin").hasRole("ADMIN");
+            request.requestMatchers("/api/v1/banana/").hasAnyRole("USER", "ADMIN");
             request.requestMatchers("/**").permitAll();
         });
         httpSecurity.httpBasic(Customizer.withDefaults());
