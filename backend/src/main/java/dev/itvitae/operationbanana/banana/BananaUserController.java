@@ -1,7 +1,5 @@
 package dev.itvitae.operationbanana.banana;
 
-import dev.itvitae.operationbanana.brand.Brand;
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,6 @@ public class BananaUserController {
 
   @GetMapping("/brand")
   public ResponseEntity<List<Banana>> getBananasByBrandName(@RequestParam String name) {
-    System.out.println(name);
     return ResponseEntity.ok(bananaService.getAllByBrandName(name));
   }
 }

@@ -20,8 +20,9 @@ public class Seeder implements CommandLineRunner {
   private double randomWeight() {
     final double minWeight = 0.1;
     final double maxWeight = 0.15;
+    final double randomWeight = (Math.random() * (maxWeight - minWeight)) + minWeight;
 
-    return (Math.random() * (maxWeight - minWeight)) + minWeight;
+    return Double.parseDouble("%.2f".formatted(randomWeight));
   }
 
   @Override

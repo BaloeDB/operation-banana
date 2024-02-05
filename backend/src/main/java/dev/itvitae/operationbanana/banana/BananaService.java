@@ -12,11 +12,11 @@ public class BananaService {
   private final BananaRepository bananaRepository;
 
   public List<Banana> getAll() {
-    return bananaRepository.findAll();
+    return bananaRepository.findAll().stream().filter(Banana::inStock).toList();
   }
 
   public List<Banana> getAllByBrandName(String name) {
-    return bananaRepository.findAllByBrandName(name);
+    return bananaRepository.findAllByBrandName(name).stream().filter(Banana::inStock).toList();
   }
 
   public Banana createBanana(Double weight, LocalDateTime dateTime, Brand brand) {

@@ -27,9 +27,18 @@ public class Banana {
   private Double weight;
 
   private LocalDateTime date;
+  private boolean isSold;
 
   public BigDecimal getPrice() {
     return brand.getPricePerKg().multiply(BigDecimal.valueOf(weight));
+  }
+
+  public boolean inStock() {
+    return !isSold;
+  }
+
+  public void sell() {
+    isSold = true;
   }
 
 
@@ -37,11 +46,10 @@ public class Banana {
     this.weight = weight;
     this.date = date;
     this.brand = brand;
+    this.isSold = false;
   }
 
   public Banana(Double weight, Brand brand) {
-    this.weight = weight;
-    this.date = LocalDateTime.now();
-    this.brand = brand;
+    this(weight, LocalDateTime.now(), brand);
   }
 }
