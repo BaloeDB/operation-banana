@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import banana from "/src/assets/banana.svg";
 import ClickerOwned from "../domain/clicker-owned";
 import Clicker from "../domain/clicker";
-import classes from "../styling/BananaClicker.module.css";
 
 function BananaClicker() {
-  const [bananas, setBananas] = useState(0);
+  const sessionvalue = () => {
+    if (!sessionStorage.getItem("bananas")) {
+      sessionStorage.setItem("bananas", String(0));
+      return 0;
+    } else {
+      return Number(sessionStorage.getItem("bananas"));
+    }
+  }
+
+  const [bananas, setBananas] = useState(sessionvalue);
   const [inventory, setInventory] = useState<ClickerOwned[]>([]);
   const [store] = useState<Clicker[]>([
     {
@@ -58,6 +66,8 @@ function BananaClicker() {
 
   const click = () => {
     setBananas((count) => count + 1);
+    sessionStorage.setItem("bananas", String(bananas + 1));
+    console.log(sessionStorage.getItem("bananas"));
   };
 
   const buyClicker = (clicker: Clicker) => {
@@ -86,7 +96,7 @@ function BananaClicker() {
     <>
       <div className="flex flex-col items-center">
         <div className="relative">
-          <button className={classes.BButton}>
+          <button className="btn-round">
             <img
               src={banana}
               alt="banana"
