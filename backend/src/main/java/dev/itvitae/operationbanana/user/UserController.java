@@ -37,7 +37,7 @@ public class UserController {
 
     @PostMapping(value = "/register", produces = MediaType.TEXT_PLAIN_VALUE)
     public String register(@RequestBody User user) {
-        if (userRepo.getByUsername(user.getUsername()).isEmpty()) {
+        if (userRepo.getByUsername(user.getUsername()).isPresent()) {
             throw new AccessDeniedException("Username already exists");
         }
         if (user.validateDetails()) {
