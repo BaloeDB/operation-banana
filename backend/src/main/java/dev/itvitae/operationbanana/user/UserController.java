@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
     private final UserRepo userRepo;
     private final AuthenticationManager authenticationManager;
@@ -38,7 +38,7 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "register", produces = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(value = "/register", produces = MediaType.TEXT_PLAIN_VALUE)
     public String register(@RequestBody User user) {
         if (userRepo.getByUsername(user.getUsername()).isEmpty() && user.validateDetails()) {
             String password = user.getPassword();
