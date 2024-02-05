@@ -1,5 +1,6 @@
 import { useState } from "react";
-import banana from "/src/assets/banana.svg"
+import banana from "/src/assets/banana.svg";
+import classes from "../styling/BananaClicker.module.css";
 
 function BananaClicker() {
   const [count, setCount] = useState(0);
@@ -11,7 +12,7 @@ function BananaClicker() {
 
   return (
     <>
-      <button><img 
+      <button className={classes.BButton}><img 
         src={banana} 
         alt="banana"
         width="200px" 

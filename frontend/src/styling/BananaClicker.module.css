@@ -1,0 +1,15 @@
+.BButton {  
+  margin-top: 2%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s ease-in-out;
+}
+.BButton:hover {
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.75rem #f7ad3e);
+}
+.BButton:active {  
+  filter: drop-shadow(0 0 0.6rem #bf7f1f);
+}
