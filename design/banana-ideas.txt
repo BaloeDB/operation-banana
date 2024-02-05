@@ -1,0 +1,7 @@
+MAIN REQUIREMENTS
+Banana Shop
+Banana Clickr
+
+BONUS REQUIREMENTS
+Monkey
+Banana Recipes
