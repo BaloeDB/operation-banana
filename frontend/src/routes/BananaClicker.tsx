@@ -11,13 +11,15 @@ function BananaClicker() {
 
   return (
     <>
-      <button><img src={banana} alt="banana" onClick={(e) => {
-        e.preventDefault();
-        click();
-      }} /></button>
-      <p>
-        banana is {count}
-      </p>
+      <button><img 
+        src={banana} 
+        alt="banana"
+        width="200px" 
+        onClick={(e) => {
+          e.preventDefault();
+          click();
+        }} /></button>
+      <p>banana is {count}</p>
     </>
   );
 }
