@@ -1,5 +1,5 @@
 package dev.itvitae.operationbanana.order;
 
-public class OrderRequest {
+public record OrderRequest(String brandName, int amount) {
 
 }
