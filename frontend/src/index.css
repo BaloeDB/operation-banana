@@ -23,16 +23,31 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  margin: auto;
+  margin-top: 40px;
+  width: min(800px, 100%);
+  background: #333333;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
 }
 
 button {
