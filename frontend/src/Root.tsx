@@ -11,7 +11,7 @@ function Root() {
           <div className="flex gap-2">
             <Link to="">Home</Link>
             <Link to="banana-clicker">Banana Clicker</Link>
-            <Link to="create">Create Banana</Link>
+            <Link to="create">Order Banana</Link>
           </div>
         </nav>
       </header>
