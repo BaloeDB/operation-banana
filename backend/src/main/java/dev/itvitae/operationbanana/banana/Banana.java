@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,11 @@ public class Banana {
   private Long weight;
 
   private LocalDateTime date;
+
+  public BigDecimal getPrice() {
+    return brand.getPricePerKg().multiply(BigDecimal.valueOf(weight));
+  }
+
 
   public Banana(Long weight, LocalDateTime date, Brand brand) {
     this.weight = weight;
