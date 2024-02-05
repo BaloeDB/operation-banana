@@ -32,6 +32,9 @@ public class JsonTokenProvider {
     @Autowired
     UserDetailsService service;
 
+    public JsonTokenProvider() {
+    }
+
     @PostConstruct
     @SuppressWarnings({"deprecation", "RedundantCast", "RedundantSuppression"})
     private void init() {
