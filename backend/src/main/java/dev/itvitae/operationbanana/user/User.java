@@ -19,8 +19,8 @@ import java.util.Collection;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
+@Entity(name = "`users`")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -35,6 +35,10 @@ public class User implements UserDetails {
     public User(String username, String password, Role... roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
+    }
+
+    public void setRoles(Role... roles) {
         this.roles = roles;
     }
 
@@ -61,6 +65,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean validateDetails() {
+        return username.length() <= 20 && username.matches("\\w+") && password.length() > 7;
     }
 
     public enum Role {

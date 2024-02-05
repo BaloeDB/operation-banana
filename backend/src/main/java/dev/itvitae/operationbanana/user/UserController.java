@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/user")
 public class UserController {
     private final UserRepo userRepo;
     private final AuthenticationManager authenticationManager;
@@ -34,5 +36,17 @@ public class UserController {
         } catch (Exception exception) {
             return null;
         }
+    }
+
+    @PostMapping(value = "register", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String register(@RequestBody User user) {
+        if (userRepo.getByUsername(user.getUsername()).isEmpty() && user.validateDetails()) {
+            String password = user.getPassword();
+            user.setPassword(passwordEncoder.encode(password));
+            user.setRoles(User.Role.ROLE_USER);
+            userRepo.save(user);
+            return tokenProvider.generateAccessToken(user);
+        }
+        return "";
     }
 }
