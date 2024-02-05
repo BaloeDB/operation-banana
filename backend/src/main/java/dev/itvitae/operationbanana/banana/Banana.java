@@ -1,5 +1,6 @@
 package dev.itvitae.operationbanana.banana;
 
+import dev.itvitae.operationbanana.brand.Brand;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,20 +20,22 @@ public class Banana {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-//  @ManyToOne
-//  private Brand brand;
+  @ManyToOne
+  private Brand brand;
 
   private Long weight;
 
   private LocalDateTime date;
 
-  public Banana(Long weight, LocalDateTime date) {
+  public Banana(Long weight, LocalDateTime date, Brand brand) {
     this.weight = weight;
     this.date = date;
+    this.brand = brand;
   }
 
-  public Banana(Long weight) {
+  public Banana(Long weight, Brand brand) {
     this.weight = weight;
     this.date = LocalDateTime.now();
+    this.brand = brand;
   }
 }
