@@ -20,7 +20,7 @@ public class BananaAdminController {
   private final BananaService bananaService;
   private final BrandService brandService;
 
-  private record BananaBody(Long weight, Long brandId) {}
+  private record BananaBody(Double weight, Long brandId) {}
   @PostMapping("/create")
   public ResponseEntity<Banana> createBanana(@RequestBody BananaBody bananaBody, UriComponentsBuilder ucb) {
       Optional<Brand> brand = brandService.getBrandById(bananaBody.brandId);

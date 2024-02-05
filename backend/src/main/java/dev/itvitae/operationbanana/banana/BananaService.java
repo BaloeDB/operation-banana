@@ -19,7 +19,7 @@ public class BananaService {
     return bananaRepository.findAllByBrandName(name);
   }
 
-  public Banana createBanana(Long weight, LocalDateTime dateTime, Brand brand) {
+  public Banana createBanana(Double weight, LocalDateTime dateTime, Brand brand) {
     return bananaRepository.save(new Banana(weight, dateTime, brand));
   }
 }

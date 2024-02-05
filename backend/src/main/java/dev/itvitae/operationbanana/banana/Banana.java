@@ -24,7 +24,7 @@ public class Banana {
   @ManyToOne
   private Brand brand;
 
-  private Long weight;
+  private Double weight;
 
   private LocalDateTime date;
 
@@ -33,13 +33,13 @@ public class Banana {
   }
 
 
-  public Banana(Long weight, LocalDateTime date, Brand brand) {
+  public Banana(Double weight, LocalDateTime date, Brand brand) {
     this.weight = weight;
     this.date = date;
     this.brand = brand;
   }
 
-  public Banana(Long weight, Brand brand) {
+  public Banana(Double weight, Brand brand) {
     this.weight = weight;
     this.date = LocalDateTime.now();
     this.brand = brand;

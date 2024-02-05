@@ -17,6 +17,13 @@ public class Seeder implements CommandLineRunner {
   private final BananaRepository bananaRepository;
   private final BrandRepository brandRepository;
 
+  private double randomWeight() {
+    final double minWeight = 0.1;
+    final double maxWeight = 0.15;
+
+    return (Math.random() * (maxWeight - minWeight)) + minWeight;
+  }
+
   @Override
   public void run(String... args) {
     if (bananaRepository.count() == 0 && brandRepository.count() == 0) {
@@ -36,19 +43,16 @@ public class Seeder implements CommandLineRunner {
       Brand itvitae = new Brand("ITvitae", new BigDecimal("0.50"), "Netherlands");
       brandRepository.save(itvitae);
 
-      bananaRepository.saveAll(List.of(new Banana(100L, chiquita),
-          new Banana(125L, dole), new Banana(123L, delMonte),
-          new Banana(122L, dole), new Banana(150L, zespri),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae),
-          new Banana(143L, itvitae)
-      ));
-
-
+      final int bananasPerBrand = 100;
+      for (int i = 0; i < bananasPerBrand; i++) {
+        bananaRepository.saveAll(List.of(
+            new Banana(randomWeight(), chiquita),
+            new Banana(randomWeight(), dole),
+            new Banana(randomWeight(), delMonte),
+            new Banana(randomWeight(), zespri),
+            new Banana(randomWeight(), itvitae)
+        ));
+      }
     }
   }
 }
