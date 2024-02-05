@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import banana from "/src/assets/banana.svg";
 import ClickerOwned from "../domain/clicker-owned";
 import Clicker from "../domain/clicker";
+import classes from "../styling/BananaClicker.module.css";
 
 function BananaClicker() {
   const [bananas, setBananas] = useState(0);
@@ -85,7 +86,7 @@ function BananaClicker() {
     <>
       <div className="flex flex-col items-center">
         <div className="relative">
-          <button className="btn-round">
+          <button className={classes.BButton}>
             <img
               src={banana}
               alt="banana"
