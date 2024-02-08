@@ -20,7 +20,7 @@ public class OrderService {
   private static final int THRESHOLD = 25;
 
   public Order createOrder(OrderRequest request) {
-    final List<Banana> bananas = new ArrayList<>(bananaService.getAllByBrandName(request.brandName()));
+    final List<Banana> bananas = new ArrayList<>(bananaService.getAllByBrandId(request.brandId()));
 
     if (bananas.size() < request.amount()) {
       return null;

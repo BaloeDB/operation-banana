@@ -17,7 +17,7 @@ public class Seeder implements CommandLineRunner {
   private final BananaRepository bananaRepository;
   private final BrandRepository brandRepository;
 
-  private double randomWeight() {
+  public static double randomWeight() {
     final double minWeight = 0.1;
     final double maxWeight = 0.15;
     final double randomWeight = (Math.random() * (maxWeight - minWeight)) + minWeight;
@@ -44,7 +44,7 @@ public class Seeder implements CommandLineRunner {
       Brand itvitae = new Brand("ITvitae", new BigDecimal("0.50"), "Netherlands");
       brandRepository.save(itvitae);
 
-      final int bananasPerBrand = 100;
+      final int bananasPerBrand = 25;
       for (int i = 0; i < bananasPerBrand; i++) {
         bananaRepository.saveAll(List.of(
             new Banana(randomWeight(), chiquita),
