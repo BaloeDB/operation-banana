@@ -19,6 +19,10 @@ public class BananaService {
     return bananaRepository.findAllByBrandName(name).stream().filter(Banana::inStock).toList();
   }
 
+  public List<Banana>   getAllByBrandId(Long id) {
+    return bananaRepository.findAllByBrandId(id).stream().filter(Banana::inStock).toList();
+  }
+
   public Banana createBanana(Double weight, LocalDateTime dateTime, Brand brand) {
     return bananaRepository.save(new Banana(weight, dateTime, brand));
   }

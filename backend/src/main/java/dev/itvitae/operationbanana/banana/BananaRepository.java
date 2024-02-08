@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface BananaRepository extends JpaRepository<Banana, Long> {
   @Query
   List<Banana> findAllByBrandName(String name);
+
+  @Query
+  List<Banana> findAllByBrandId(Long id);
 }
