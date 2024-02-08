@@ -3,10 +3,13 @@ import banana from "/src/assets/banana.svg";
 import ClickerOwned from "../domain/clicker-owned";
 import Clicker from "../domain/clicker";
 import classes from "../styling/BananaClicker.module.css";
+import useBananaState from "../hooks/useBananaState";
+import useInventoryState from "../hooks/useInventoryState";
 
 function BananaClicker() {
-  const [bananas, setBananas] = useState(0);
-  const [inventory, setInventory] = useState<ClickerOwned[]>([]);
+
+  const [bananas, setBananas] = useBananaState("bananas");
+  const [inventory, setInventory] = useInventoryState("inventory");
   const [store] = useState<Clicker[]>([
     {
       id: 0,
@@ -40,7 +43,7 @@ function BananaClicker() {
     const interval = setInterval(() => {
       let bananasObtained = 0;
 
-      inventory.forEach((c) => {
+      inventory.forEach((c: ClickerOwned) => {
         c.elapsed += intervalMs;
         let interval = 60000 / c.clicker.clicksPerMinute;
         while (c.elapsed > interval) {
@@ -49,7 +52,7 @@ function BananaClicker() {
         }
       });
 
-      setBananas((old) => old + bananasObtained);
+      setBananas(bananas + bananasObtained);
     }, intervalMs);
 
     // Cleanup
@@ -57,16 +60,15 @@ function BananaClicker() {
   }, [inventory, bananas]);
 
   const click = () => {
-    setBananas((count) => count + 1);
+    setBananas(bananas + 1);
   };
 
   const buyClicker = (clicker: Clicker) => {
     if (!canAfford(clicker)) return;
 
-    setBananas((old) => old - clicker.price);
+    setBananas(bananas - clicker.price);
 
-    setInventory((old) => [
-      ...old,
+    setInventory([...inventory,
       {
         clicker,
         elapsed: 0,
@@ -75,7 +77,7 @@ function BananaClicker() {
   };
 
   const getOwnedQuantity = (clicker: Clicker): number => {
-    return inventory.filter((c) => c.clicker === clicker).length;
+    return inventory.filter((c: ClickerOwned) => c.clicker === clicker).length;
   };
 
   const canAfford = (clicker: Clicker) => {
@@ -98,7 +100,7 @@ function BananaClicker() {
               }}
             />
           </button>
-          {inventory.map((c, index) => (
+          {inventory.map((c: ClickerOwned, index: number) => (
             <span
               className="circle-child"
               key={index}
