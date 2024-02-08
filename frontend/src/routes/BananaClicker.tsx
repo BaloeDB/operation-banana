@@ -84,7 +84,7 @@ function BananaClicker() {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mt-8">
         <div className="relative">
           <button className={classes.BButton}>
             <img
@@ -110,7 +110,7 @@ function BananaClicker() {
             </span>
           ))}
         </div>
-        <h2>{bananas}🍌</h2>
+        <h2 className="mt-4">🍌{bananas}</h2>
       </div>
 
       <h2>🏪 Store</h2>

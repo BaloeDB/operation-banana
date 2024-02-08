@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -39,43 +43,23 @@ body {
   padding: 1rem;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1,
+h2,
+h3,
+h4 {
   margin-top: 0;
   margin-bottom: 1rem;
+  line-height: 1.1;
+  font-weight: bold;
 }
 
-.flex {
-  display: flex;
+h1 {
+  font-size: 3.2em;
 }
 
-.flex-col {
-  flex-direction: column;
-}
-
-.items-start {
-  align-items: start;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.m-0 {
-  margin: 0;
-}
-
-.relative {
-  position: relative;
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
 }
 
 .circle-child {
@@ -98,7 +82,13 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+  background: #b7b7b7;
   transition: border-color 0.25s;
+}
+
+button:disabled {
+  background: #656565;
+  opacity: 0.3;
 }
 
 button:hover {
