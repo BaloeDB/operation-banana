@@ -12,6 +12,7 @@ function Root() {
             <Link to="">Home</Link>
             <Link to="banana-clicker">Banana Clicker</Link>
             <Link to="create">Order Banana</Link>
+            <Link to="banana-recipe">Banana Recipe</Link>
           </div>
         </nav>
       </header>

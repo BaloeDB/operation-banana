@@ -1,9 +1,9 @@
-.BButton {  
-  margin-top: 2%;
+.BButton {
+  aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   border-radius: 100%;
   transition: transform 0.15s;
   user-select: none;
@@ -15,7 +15,7 @@
   transform: scale(1.05);
 }
 
-.BButton:active {  
+.BButton:active {
   filter: drop-shadow(0 0 0.6rem #bf7f1f);
   transform: scale(0.95);
 }

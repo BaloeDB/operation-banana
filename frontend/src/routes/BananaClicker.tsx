@@ -91,6 +91,7 @@ function BananaClicker() {
               src={banana}
               alt="banana"
               width="150px"
+              height="150px"
               onClick={(e) => {
                 e.preventDefault();
                 click();
@@ -99,8 +100,8 @@ function BananaClicker() {
           </button>
           {inventory.map((c, index) => (
             <span
-              key={index}
               className="circle-child"
+              key={index}
               style={{
                 transform: `rotate(${index * 10}deg) translateY(-100px)`,
               }}

@@ -6,6 +6,7 @@ import BananaClicker from "./routes/BananaClicker.tsx";
 import Home from "./routes/Home.tsx";
 import React from "react";
 import CreateBanana from "./routes/CreateBanana.tsx";
+import BananaRecipe from "./routes/BananaRecipe.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "create",
         element: <CreateBanana />,
+      },
+      {
+        path: "banana-recipe",
+        element: <BananaRecipe />,
       }
     ],
   },
