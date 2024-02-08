@@ -20,39 +20,39 @@ function MonkeyRun() {
   const [gameSpeed, setGameSpeed] = useState(GAME_SPEED_START);
   const [holdingJump, setHoldingJump] = useState(false);
   const [spawnTimer, setSpawnTimer] = useState(1);
-  const [entities, setEntities] = useState<Entity[]>([]);
-  const [monkey, setMonkey] = useState<Entity>({
-    id: -1,
-    icon: "🐒",
-    w: 0.5,
-    h: 0.5,
-    x: 1,
-    y: 0,
-    yVel: 0,
-  });
-
-  useEffect(
-    () => {
-      const keyDownListener = (event: KeyboardEvent) => {
-        if (event.key === JUMP_KEY && !holdingJump) {
-          jump();
-        }
-      };
-
-      const keyUpListener = (event: KeyboardEvent) => {
-        if (event.key === JUMP_KEY) setHoldingJump(false);
-      };
-
-      addEventListener(KEY_DOWN_EVENT, keyDownListener);
-      addEventListener(KEY_UP_EVENT, keyUpListener);
-
-      return () => {
-        removeEventListener(KEY_DOWN_EVENT, keyDownListener);
-        removeEventListener(KEY_UP_EVENT, keyUpListener);
-      };
+  const [entities, setEntities] = useState<Entity[]>([
+    {
+      player: true,
+      id: -1,
+      icon: "🐒",
+      w: 0.5,
+      h: 0.5,
+      x: 1,
+      y: 0,
+      yVel: 0,
     },
-    [] // Re-run if eventName or element changes
-  );
+  ]);
+
+  // Initialize
+  useEffect(() => {
+    const keyDownListener = (event: KeyboardEvent) => {
+      if (event.key === JUMP_KEY && !holdingJump) {
+        jump();
+      }
+    };
+
+    const keyUpListener = (event: KeyboardEvent) => {
+      if (event.key === JUMP_KEY) setHoldingJump(false);
+    };
+
+    addEventListener(KEY_DOWN_EVENT, keyDownListener);
+    addEventListener(KEY_UP_EVENT, keyUpListener);
+
+    return () => {
+      removeEventListener(KEY_DOWN_EVENT, keyDownListener);
+      removeEventListener(KEY_UP_EVENT, keyUpListener);
+    };
+  }, []);
 
   let frameId: any;
 
@@ -64,13 +64,6 @@ function MonkeyRun() {
 
       if (!playing) return;
 
-      // Position monkey
-      setMonkey((old) => ({
-        ...old,
-        yVel: Math.max(-FALL_SPEED, old.yVel - GRAVITY * DELTA_TIME),
-        y: Math.max(FLOOR_Y, old.y + old.yVel * DELTA_TIME),
-      }));
-
       // Position entities and remove old ones
       setEntities((old) => {
         old.forEach((entity) => {
@@ -79,10 +72,16 @@ function MonkeyRun() {
             entity.yVel - GRAVITY * DELTA_TIME
           );
           entity.y = Math.max(FLOOR_Y, entity.y + entity.yVel * DELTA_TIME);
-          entity.x = entity.x - gameSpeed * DELTA_TIME;
+          if (!entity.player) entity.x = entity.x - gameSpeed * DELTA_TIME;
         });
 
-        return old.filter((entity) => entity.x > 0);
+        return old.filter(
+          (entity) =>
+            entity.x > 0 &&
+            !entities.some(
+              (other) => other != entity && checkOverlap(entity, other)
+            )
+        );
       });
 
       // Increase game speed
@@ -90,16 +89,20 @@ function MonkeyRun() {
         Math.min(old + GAME_SPEED_INCREASE * DELTA_TIME, GAME_SPEED_MAX)
       );
 
-      // Check collisions
-
       // Spawn
       setSpawnTimer((old) => old - DELTA_TIME);
-
       if (spawnTimer <= 0) {
-        console.log("Spawn");
         setSpawnTimer(2 * gameSpeed);
-        spawnEntity();
-        // Spawn entity
+        spawnEntity({
+          player: false,
+          id: entities.length,
+          icon: "🌵",
+          x: 7,
+          y: FLOOR_Y,
+          w: 0.5,
+          h: 0.5,
+          yVel: 0,
+        });
       }
 
       // Start new frame
@@ -111,28 +114,28 @@ function MonkeyRun() {
 
     // Clear loop on destroy
     return () => cancelAnimationFrame(frameId);
-  }, [monkey, lastFrameTime]);
+  }, [lastFrameTime, entities]);
+
+  const checkOverlap = (a: Entity, b: Entity) => {
+    let overlaps =
+      a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    if (overlaps) console.log("Overlap!");
+    return overlaps;
+  };
 
   const jump = () => {
-    setMonkey((old) => ({ ...old, yVel: JUMP_VEL }));
-    setHoldingJump(true);
+    const monkey = entities.find((e) => e.player)!;
+
+    if (monkey.y < FLOOR_Y + 0.1) {
+      monkey.yVel = JUMP_VEL;
+      setHoldingJump(true);
+    }
+
     setPlaying(true);
   };
 
-  const spawnEntity = () => {
-    const entity: Entity = {
-      id: entities.length,
-      icon: "🌵",
-      x: 7,
-      y: FLOOR_Y,
-      w: 0.5,
-      h: 0.5,
-      yVel: 0,
-    };
-
+  const spawnEntity = (entity: Entity) => {
     setEntities((old) => [...old, entity]);
-
-    console.log(entities);
   };
 
   return (
@@ -148,22 +151,10 @@ function MonkeyRun() {
           </div>
         )}
 
-        {/* Monkey */}
-        <div
-          className="absolute text-5xl"
-          style={{
-            position: "absolute",
-            bottom: `${monkey.y * PIXELS_PER_METER}px`,
-            left: `${monkey.x * PIXELS_PER_METER}px`,
-          }}
-        >
-          {monkey.icon}
-        </div>
-
-        {/* Other entities */}
-        {entities.map((entity) => (
+        {/* Entities */}
+        {entities.map((entity, index) => (
           <div
-            key={entity.id}
+            key={index}
             className="absolute text-5xl"
             style={{
               position: "absolute",
@@ -187,6 +178,7 @@ class Entity {
   public x: number = 0;
   public y: number = 0;
   public yVel: number = 0;
+  public player = false;
 }
 
 export default MonkeyRun;
